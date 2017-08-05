@@ -168,7 +168,7 @@ false---不可删除
 ### 景点图片上传
 
 * router
-  * /upload/{provinceName}/{cityName}/{username}  POST
+  * /upload/{provinceName}/{cityName}  POST
 
 * request
 
@@ -182,7 +182,7 @@ false---不可删除
 ### 高校图片上传
 
 * router
-  * /upload/{provinceName}/{username}  POST
+  * /upload/{provinceName}  POST
 
 * request
 
