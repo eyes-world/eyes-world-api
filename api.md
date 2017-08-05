@@ -8,7 +8,7 @@
 #### 省份信息
 
 * router
-  * /provinces/cities
+  * /api/provinces/cities
 
 * request
 ```
@@ -29,7 +29,7 @@
 ```
 #### 城市信息
 * router
-  * /provinces/cities/{provinceName}
+  * /api/provinces/cities/{provinceName}
 
 * request
   *
@@ -47,7 +47,7 @@
 ### 1.2 浏览相册
 
 * router
-  * /provinces/cities/{provinceName}/{cityName}/spots
+  * /api/provinces/cities/{provinceName}/{cityName}/spots
 
 * request
 ```
@@ -69,9 +69,9 @@
 albumId，photoId从0开始计数
 
 * router
-  * /provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}
-  * /provinces/cities/广东/佛山/spots/0/0     第一个相册的第一张图片
-  * /provinces/cities/广东/佛山/spots/0/1     第一个相册的第二张图片
+  * /api/provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}
+  * /api/provinces/cities/广东/佛山/spots/0/0     第一个相册的第一张图片
+  * /api/provinces/cities/广东/佛山/spots/0/1     第一个相册的第二张图片
 
 
 * 第一次请求图片
@@ -139,7 +139,7 @@ last:false---不是相册的最后一张照片
 ### 1.4 上一张，下一张
 
 * router
-  * /provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}
+  * /api/provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}
 
 * request
 ```
@@ -153,7 +153,7 @@ last:false---不是相册的最后一张照片
 ### 1.5 景点图片点赞
 
 * router
-  * /provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}/like
+  * /api/provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}/like
 
 * request
 
@@ -171,7 +171,7 @@ false---显示未点赞
 ### 1.6 获取景点评论
 
 * router
-  * /provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}/comment
+  * /api/provinces/cities/{provinceName}/{cityName}/spots/{albumId}/{photoId}/comment
 
 * request
 
@@ -197,7 +197,7 @@ false---显示未点赞
 ### 2.1 省份选择
 #### 省份选择
 * router
-  * /provinces/collage
+  * /api/provinces/collage
 
 * request
 
@@ -214,7 +214,7 @@ false---显示未点赞
 #### 高校选择
 
 * router
-  * /provinces/college/{provinceName}
+  * /api/provinces/college/{provinceName}
 
 * request
   *
@@ -236,9 +236,9 @@ false---显示未点赞
 ### 2.2 浏览高校图片
 
 * router
-  * /provinces/college/{provinceName}/{albumId}/{photoId}
-  * /provinces/college/广东/0/0     第一个相册的第一张图片
-  * /provinces/college/广东/0/1    第一个相册的第二张图片
+  * /api/provinces/college/{provinceName}/{albumId}/{photoId}
+  * /api/provinces/college/广东/0/0     第一个相册的第一张图片
+  * /api/provinces/college/广东/0/1    第一个相册的第二张图片
   * 这里photoId默认值为0
   * 前端自己判断是否能点击上一张下一张
 
@@ -253,7 +253,7 @@ false---显示未点赞
 ### 2.3 高校图片点赞
 
 * router
-  * /provinces/college/{provinceName}/{albumId}/{photoId}/like
+  * /api/provinces/college/{provinceName}/{albumId}/{photoId}/like
 
 * request
 
@@ -270,7 +270,7 @@ false---显示未点赞
 ### 2.4 获取高校评论
 
 * router
-  * /provinces/college/{provinceName}/{albumId}/{photoId}/comment
+  * /api/provinces/college/{provinceName}/{albumId}/{photoId}/comment
 
 * request
 
@@ -355,23 +355,57 @@ false---显示未点赞
 ### 4.5 我的作品
 
 * router
-  * /user/works/{userName}
+  * /api/user/works
 
 * response
 ```js
 [{
-    "date": UNIX,
-    "url": String,
-    "photoId": Number,
-    "photoName":String,
-    "albumId": Number,
-    "albumName":String
+    "photoId":Integer,
+	"username":String,
+	"photoName":String,
+	"photoDescription":String,
+	"url":String,
+	"like":Boolean,
+	"likeAmount":Integer,
+	"createTime":Integer,
+	"last":null
 }, ...]
 ```
+```js
+例子
+[{"photoId":6,
+"username":"Mike",
+"photoName":"abcd-1234567",
+"photoDescription":"666",
+"url":"/upload/广东/潮州/Mike/abcd%%1501641406355",
+"like":null,
+"likeAmount":2,
+"createTime":0,
+"last":null},
+{"photoId":7,
+"username":"Mike",
+"photoName":"abcd-345678",
+"photoDescription":"666",
+"url":"/upload/广东/潮州/Mike/abcd%%1501641681019",
+"like":null,
+"likeAmount":0,
+"createTime":0,
+"last":null}]
+```
+
 
 ### 4.5 我的作品-删除
 
-  * /user/works/{userName}/delete/{albumId}/{photoName}
+  * /api/user/works/{photoName}/delete
+
+  * response
+```
+{
+    "delete":Boolean
+}
+```
+true--删除成功
+false--删除失败
 
 ### 4.6 我的作品-上传
 
@@ -381,33 +415,41 @@ false---显示未点赞
 ### 4.7 我的收藏
 
 * router
-  * /user/favorite/{userId}
+  * /api/user/favorite/
 
 * response
 ```js
 [{
-    "date": UNIX,
-    "url": String,
     "photoId": Number,
-    "photoName":String,
-    "albumId": Number,
-    "albumName":String
+	"photoName":String,
+	"photoDescription":String,
+    "url": String,
+    "like":Boolean,
+	"likeAmount":Number,
+	"createTime":Number,
+	"last":null
 }, ...]
 ```
-
-
-
-## 删除图片
-
-* router
-  * /upload/{provinceName}/{cityName}/{username}  POST
-
-* request
-
-  * ?photoName=...&url=...
-
-
-* respond
 ```js
-  * {respond:Boolean}
+例子：
+[{"photoId":6,
+"username":"Mike",
+"photoName":"abcd-1234567",
+"photoDescription":"666",
+"url":"/upload/广东/潮州/Mike/abcd%%1501641406355",
+"like":true,
+"likeAmount":2,
+"createTime":0,
+"last":null},
+{"photoId":10,
+"username":"Mike",
+"photoName":"ac",
+"photoDescription":null,
+"url":"/upload/广东/潮州/Mike/abcd%%1501641406355",
+"like":false,
+"likeAmount":1,
+"createTime":0,
+"last":null}]
 ```
+
+
