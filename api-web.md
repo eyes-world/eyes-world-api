@@ -83,84 +83,6 @@ false---不可用使用，已经重名
 
 ---
 
-## 景点图片评论
-
-### 添加图片评论
-
-* router
-  * /spotsComment/{provinceName}/{cityName}/{albumId}/{photoId}  POST
-
-* request
-```js
-  * ?photoComment=.....
-```
-
-* respond
-```js
-  * {respond:Boolean}
-```
-
-### 是否可删除图片评论（用户自己发的评论才可以删除）
-
-* router
-  * /spotsComment/{provinceName}/{cityName}/{albumId}/{photoId}/{commentId}/deletable
-  
-* respond
-```js
-  * {respond:Boolean} 
-```
-true---可删除
-false---不可删除
-
-### 删除图片评论
-* router
-  * /spotsComment/{provinceName}/{cityName}/{albumId}/{photoId}/{commentId}/delete
-  
-* respond
-```js
-  * {respond:Boolean}
-```
-
-
-
-## 高校图片评论
-
-### 添加图片评论
-
-* router
-  * /collegeComment/{provinceName}/{albumId}/{photoId}  POST
-
-* request
-
-  *  ?photoComment=.....
-
-
-* respond
-```js
-  * {respond:Boolean}
-```
-### 是否可删除图片评论（用户自己发的评论才可以删除）
-
-* router
-  * /collegeComment/{provinceName}/{albumId}/{photoId}/{commentId}/deletable
-  
-* respond
-```js
-  * {respond:Boolean} 
-```
-true---可删除
-false---不可删除
-
-
-### 删除图片评论
-
-* router
-  * /collegeComment/{provinceName}/{albumId}/{photoId}/{commentId}/delete  
-  
-* respond
-```js
-  * {respond:Boolean}
-```
 
 
 ## 上传
@@ -194,5 +116,53 @@ false---不可删除
   * {respond:Boolean}
 ```
 
+## 图片评论
+
+### 获取评论
+* router
+  */api//user/works/{photoName}/comment  GET
 
 
+* response
+```js
+[{
+	"commentId":Integer,
+    "userName": String,
+    "comment": String,
+    "modificationTime": Number
+}, ...]
+```
+```js
+例子：
+[{"commentId":9,
+"username":"Mike",
+"content":"评论内容1",
+"modificationTime":2017},
+{"commentId":10,
+"username":"Liky",
+"content":"评论内容2",
+"modificationTime":2017}]
+```
+
+### 是否可删除图片评论（用户自己发的评论才可以删除）
+
+* router
+  * /api/user/works/{commentId}/deletable
+  
+* respond
+```js
+  * {respond:Boolean} 
+```
+true---可删除
+false---不可删除
+
+
+### 删除图片评论
+
+* router
+  * /api/user/works/{commentId}/commentDelete  
+  
+* respond
+```js
+  * {respond:Boolean}
+```
