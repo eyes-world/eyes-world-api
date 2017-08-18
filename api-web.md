@@ -166,3 +166,17 @@ false---不可删除
 ```js
   * {respond:Boolean}
 ```
+
+## 用户管理
+
+### 修改密码
+* router
+  * /api/user/works/{commentId}/commentDelete   POST
+  * 表单格式：oldPasswrod=xxx&newPassword=xxx
+  
+* respond
+```js
+  * {"success":Boolean}
+```
+true：修改成功
+false：旧密码输入错误，修改失败
