@@ -321,14 +321,11 @@ false---显示未点赞
 * router
   * /user
 
-* request
-  * cookie：
-  
+
 * response
 ```js
 {
-    "state":Boolean,
-    "username": String //state = 1 时才返回
+    "username": String
 }
 ```
 
@@ -347,10 +344,10 @@ false---显示未点赞
 
 * 跳到 4.1 重新验证
 
-### 4.4 退出
+### 4.4 退出登录
 
 * router
-  * /logout
+  * /p_logout
 
 ### 4.5 我的作品
 
