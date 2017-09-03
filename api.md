@@ -301,7 +301,7 @@ false---显示未点赞
 ### 3.1 轮播图
 
 * router
-  * /lastest
+  * /api/lastest
 
 * response
   * 同 1.2-response
@@ -309,7 +309,7 @@ false---显示未点赞
 ### 3.2 推荐相册
 
 * router
-  * /lastest
+  * /api/lastest
 
 * response
   * 同 1.3-response
